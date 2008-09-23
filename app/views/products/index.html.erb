@@ -1,27 +1,36 @@
-<h1>Listing products</h1>
+<div id="product-list">
+  <h1>Listing products</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Highlight</th>
-    <!--<th>Description</th>-->
-    <th>Image url</th>
-    <th>Price</th>
-  </tr>
+  <table>
+  <% for product in @products %>
+    <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
 
-<% for product in @products %>
-  <tr>
-    <td><%=h product.title %></td>
-    <td><%= product.highlight %></td>
-    <!--<td><%= product.description %></td>-->
-    <td><%=h product.image_url %></td>
-    <td><%=h product.price %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+      <td>
+        <%= link_to((image_tag product.image_url, :class => 'list-image'), product) %>
+        <%#= image_tag product.image_url, :class => 'list-image' %>
+        <%#= link_to product image_tag product.image_url, :class => 'list-image', :action => 'product' %>
+      </td>
+      
+      <td class="list-description">
+        <dl>
+          <dt><%=h product.title %></dt>
+          <dd><em><%=h product.highlight %></em></dd>
+          <dd><%=h truncate(product.description.gsub(/<.*?>/,''), 80) %></dd>
+        </dl>
+      </td>
+
+      <td class="list-actions">
+
+        <%= link_to 'Show', product %><br/>
+        <%= link_to 'Edit', edit_product_path(product) %><br/>
+        <%= link_to 'Destroy', product, 
+                    :confirm => 'Are you sure?',
+                    :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 
 <br />
 
