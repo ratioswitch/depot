@@ -3,7 +3,8 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Description</th>
+    <th>Highlight</th>
+    <!--<th>Description</th>-->
     <th>Image url</th>
     <th>Price</th>
   </tr>
@@ -11,7 +12,8 @@
 <% for product in @products %>
   <tr>
     <td><%=h product.title %></td>
-    <td><%=h product.description %></td>
+    <td><%= product.highlight %></td>
+    <!--<td><%= product.description %></td>-->
     <td><%=h product.image_url %></td>
     <td><%=h product.price %></td>
     <td><%= link_to 'Show', product %></td>
